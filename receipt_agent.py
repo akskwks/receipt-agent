@@ -534,8 +534,8 @@ class ReceiptAgent:
                 logs_dir = folder / "logs"
                 logs_dir.mkdir(parents=True, exist_ok=True)
 
-                legacy_log_path = folder / "receipt_agent.log"
-                log_path = logs_dir / "receipt_agent.log"
+                legacy_log_path = folder / "receipt_agent_log.log"
+                log_path = logs_dir / "receipt_agent_log.log"
                 if legacy_log_path.exists() and not log_path.exists():
                     os.replace(legacy_log_path, log_path)
 
@@ -634,14 +634,14 @@ class ReceiptAgent:
         return processed
 
     def watch(self) -> None:
-        logging.info("월별 폴더 감시를 시작합니다: %s", self.root)
+        logging.info("월별 폴더 지정을 시작합니다: %s", self.root)
         logging.info("종료하려면 Ctrl+C를 누르세요.")
         try:
             while True:
                 self.run_once()
                 time.sleep(self.interval)
         except KeyboardInterrupt:
-            logging.info("폴더 감시를 종료합니다.")
+            logging.info("폴더 지정을 종료합니다.")
 
 
 def build_parser() -> argparse.ArgumentParser:
